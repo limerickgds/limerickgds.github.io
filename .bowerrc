@@ -1,0 +1,6 @@
+{
+  "directory": "bower_components",
+  "proxy": "http://192.168.105.72:8080",
+  "https-proxy": "http://192.168.105.72:8080",
+  "timeout": 5000
+}
