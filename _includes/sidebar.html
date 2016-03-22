@@ -1,2 +1,7 @@
+<a href="#" class="toggle-sidebar">目录</a>
 <div class="sidebar">
+    <ul class="side-nav">
+        {% for post in site.posts %}
+        <li><a href="{{ site.baseurl }}{{ post.url }}">post.title</a></li>
+    </ul>
 </div>
