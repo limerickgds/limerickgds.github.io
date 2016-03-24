@@ -6,4 +6,15 @@
         {{ content }}
         {% include footer.html %}
     </body>
+    <script data-main="js/app.js" src="{{"/bower_components/requirejs/require.js"|"//cdn.bootcss.com/require.js/2.1.22/require.min.js"}}"></script>
+    <script type="text/javascript">
+        requirejs.config({
+            baseUrl: '',
+            paths: {
+
+            }
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/main.es5.js"></script>
 </html>
