@@ -6,6 +6,11 @@ title: limerick's blog
     <h4>limerick</h4>
     <span>热爱生活，从事前端</span>
 </div>
+<ul class="side-nav">
+    {% for post in site.posts %}
+    <li><a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></li>
+    {% endfor %}
+</ul>
 <script data-main="js/app.js" src="{{"/bower_components/requirejs/require.js"|"//cdn.bootcss.com/require.js/2.1.22/require.min.js"}}"></script>
 <script type="text/javascript">
     requirejs.config({

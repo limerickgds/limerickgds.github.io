@@ -34,7 +34,7 @@ var config = {
         }
     },
     delete: {
-        src: developmentAssets
+        src: './src'
     },
     images: {
         src:  srcAssets + '/images/**/*',
@@ -52,7 +52,7 @@ var config = {
     },
     scripts: {
         babel: {
-            src: srcAssets + '/js/**/*.{es6.js}',
+            src: srcAssets + '/js/**/*.js',
             dest: developmentAssets + '/js',
             options: {
                 presets: ['es2015']

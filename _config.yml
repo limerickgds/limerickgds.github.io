@@ -6,9 +6,9 @@ baseurl: ""
 url: ""
 
 # Build settings
-markdown: redcarpet
+# markdown: redcarpet
 permalink: pretty
-exclude: [node_modules, scripts, bower_components]
+exclude: [node_modules, bower_components, bower.json, Gemfile, Gemfile.lock, gulp-config.es6.js, gulpfile.es6.js, gulpfile.js, package.json, params.json]
 
 sass:
   sass_dir: css
