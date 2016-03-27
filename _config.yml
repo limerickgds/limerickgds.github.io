@@ -10,9 +10,9 @@ url: ""
 permalink: pretty
 exclude: [node_modules, bower_components, bower.json, Gemfile, Gemfile.lock, gulp-config.es6.js, gulpfile.es6.js, gulpfile.js, package.json, params.json]
 
-sass:
-  sass_dir: css
-  style: :compressed
+#sass:
+#  sass_dir: css
+#  style: :compressed
 
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]

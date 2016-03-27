@@ -1,4 +1,6 @@
 const app               = '.';
+const bower             = './bower_components';
+const src               = './src';
 const development       = './src/development';  //调试环境Jekyll生成的文件目录
 const srcAssets         = './_assets';     // blog  assets 目录
 const developmentAssets = './src/assets';    // 调试环境 assets
@@ -21,7 +23,8 @@ var config = {
             server: {
                 baseDir: [
                     development,
-                    srcAssets
+                    bower,
+                    src
                 ]
             },
             port: 9999,

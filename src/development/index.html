@@ -8,49 +8,40 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>limerick's blog - limerick</title>
     <link rel="icon" href="/limerick.ico">
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600">
 </head>
 
     <body class="homepage">
-        <div class="header">
-    <div class="row">
-        <div class="medium-4 columns">
-            <a class="logo" href="/">limerick</a>
-        </div>
+        <div id="header" class="navbar navbar-static-top bg-success">
+    <div class="container">
+        <a class="navbar-brand" href="/">limerick</a>
     </div>
 </div>
 
         <div class="">
-    <h4>limerick</h4>
-    <span>热爱生活，从事前端</span>
+    <ul class="side-nav">
+        
+        <li><a href="/2016/03/25/%E5%88%9B%E5%BB%BAblog/">创建 github blog</a></li>
+        
+        <li><a href="/2016/03/25/test/">test</a></li>
+        
+    </ul>
 </div>
-<ul class="side-nav">
-    
-    <li><a href="/2016/03/25/%E5%88%9B%E5%BB%BAblog/">创建 github blog</a></li>
-    
-    <li><a href="/2016/03/25/test/">test</a></li>
-    
-</ul>
-<script data-main="js/app.js" src="/bower_components/requirejs/require.js"></script>
-<script type="text/javascript">
-    requirejs.config({
-        baseUrl: '',
-        paths: {
 
-        }
-    });
-</script>
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-
-        <div class="footer">
-    <div class="row">
+        <footer id="footer" class="blog-footer">
+    <div class="container">
+        <ul>
+            <li><a href="https://github.com/limerickgds">github</a></li>
+            <li><a href="http://weibo.com/1801226885/profile?topnav=1&wvr=6&is_all=1">新浪</a></li>
+            <li><a href="#">联系方式</a</li>
+        </ul>
     </div>
-</div>
+</footer>
 
     </body>
-    <script data-main="js/app.js" src="/bower_components/requirejs/require.js"></script>
+    <script  src="/requirejs/require.js"></script>
     <script type="text/javascript">
         requirejs.config({
             baseUrl: '',
