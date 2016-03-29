@@ -41,7 +41,7 @@ var config = {
         }
     },
     clean: {
-        src: [development, assets]
+        src: [development, assets, buildAssets]
     },
     fonts: {
         src: developmentAssets + '/fonts/*',

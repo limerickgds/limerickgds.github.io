@@ -34,7 +34,7 @@ gulp.task('serve', (cb) => {
  * 将assets生成的文件，拷贝到_assets中
  */
 
-gulp.task('build', (cb) => {
+gulp.task('build', ['serve'], (cb) => {
     return gulp.src(config.build.src)
         .pipe(gulp.dest(config.build.dest))
         .on('close',cb);
@@ -49,6 +49,7 @@ gulp.task('clean', (cb) => {
         .pipe($.clean())
         .on('close',cb);;
 });
+
 
 /**
  * jekyll 设置

@@ -2,7 +2,7 @@
 title: limerick
 email: guods2015@gmail.com
 description: "limerick's blog."
-baseurl: ""
+baseurl: "/"
 url: "http://limerickgds.github.io"
 
 # Build settings
