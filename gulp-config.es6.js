@@ -2,9 +2,9 @@ const app               = '.';
 const bower             = './bower_components';
 const src               = './src';
 const development       = './src/development';  //调试环境Jekyll生成的文件目录
-const developmentAssets = './assets';    // 调试环境 assets
-const assets            = './src/_assets';     // blog  assets 目录
-const buildAssets       = './_assets';
+const developmentAssets = './_assets';    // 调试环境 assets
+const assets            = './src/assets';     // blog  assets 目录
+const buildAssets       = './assets';
 
 var config = {
     autoprefixer: {
