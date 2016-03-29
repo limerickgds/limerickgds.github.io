@@ -36,7 +36,8 @@ var config = {
             ]
         },
         build: {
-
+            src: assets + '/**/*',
+            dest: buildAssets
         }
     },
     clean: {

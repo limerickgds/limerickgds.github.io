@@ -35,16 +35,9 @@ gulp.task('serve', (cb) => {
  */
 
 gulp.task('build', (cb) => {
-     runSequence('clean',
-     [
-         'styles',
-         'sass',
-         'scripts',
-         'images',
-         'fonts',
-         'copy:assets'
-     ],
-     cb);
+    return gulp.src(config.build.src)
+        .pipe(gulp.dest(config.build.dest))
+        .on('close',cb);
  });
 
 
@@ -55,15 +48,6 @@ gulp.task('clean', (cb) => {
     return gulp.src(config.clean.src)
         .pipe($.clean())
         .on('close',cb);;
-});
-
-/**
- * copy assets
- */
-
-gulp.task('copy:assets', () => {
-    return gulp.src(config.build.src)
-        .pipe(gulp.dest(config.build.dest));
 });
 
 /**
