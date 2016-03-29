@@ -2,10 +2,16 @@
 layout: homepage
 title: limerick's blog
 ---
-<div class="">
-    <ul class="side-nav">
+<div class="container">
+    <ul class="post-list">
         {% for post in site.posts %}
-        <li><a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></li>
+        <li class="post-li clearfix">
+            <span class="post-title pull-left">
+                <a class="underline" href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a>
+            </span>
+
+            <span class="post-time pull-right" >{{post.date | date:'%B %d, %Y'}}</span>
+        </li>
         {% endfor %}
     </ul>
 </div>

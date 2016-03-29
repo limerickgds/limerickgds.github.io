@@ -7,25 +7,43 @@
     <meta name="keywords" content="郭德实,limerick,limerickgds,blog,javascript,html,css,angularjs">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>limerick's blog - limerick</title>
-    <link rel="icon" href="/limerick.ico">
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="icon" href=".//limerick.ico">
+    <link rel="stylesheet" href=".//_assets/styles/font-awesome.min.css">
+    <link rel="stylesheet" href=".//_assets/styles/main.min.css"">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600">
 </head>
 
-    <body class="homepage">
-        <div id="header" class="navbar navbar-static-top bg-success">
-    <div class="container">
-        <a class="navbar-brand" href="/">limerick</a>
+    <body id="homepage">
+        <header id="header" class="blog-header">
+    <div class="header-logo-name">
+        <a class="blog-img img-radius" href="./">
+            <img class="img-radius header-logo" src="_assets/images/header.jpeg" alt="头像" />
+        </a>
+        <h2 class="blog-name red">
+            limerick
+            <span class="faded">'s blog</span>
+        </h2>
     </div>
-</div>
+</header>
 
-        <div class="">
-    <ul class="side-nav">
+        <div class="container">
+    <ul class="post-list">
         
-        <li><a href="/2016/03/25/%E5%88%9B%E5%BB%BAblog/">创建 github blog</a></li>
+        <li class="post-li clearfix">
+            <span class="post-title pull-left">
+                <a class="underline" href=".//2016/03/25/%E5%88%9B%E5%BB%BAblog/">创建 github blog</a>
+            </span>
+
+            <span class="post-time pull-right" >March 25, 2016</span>
+        </li>
         
-        <li><a href="/2016/03/25/test/">test</a></li>
+        <li class="post-li clearfix">
+            <span class="post-title pull-left">
+                <a class="underline" href=".//2016/03/25/test/">test</a>
+            </span>
+
+            <span class="post-time pull-right" >March 25, 2016</span>
+        </li>
         
     </ul>
 </div>
@@ -41,7 +59,7 @@
 </footer>
 
     </body>
-    <script  src="/requirejs/require.js"></script>
+    <!-- <script  src="/requirejs/require.js"></script>
     <script type="text/javascript">
         requirejs.config({
             baseUrl: '',
@@ -49,7 +67,6 @@
 
             }
         });
-    </script>
-    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-    <script src="/assets/js/main.es5.js"></script>
+    </script> -->
+    <script src=".//_assets/scripts/main.min.js"></script>
 </html>
