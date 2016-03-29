@@ -3,3 +3,5 @@
 /.sass-cache
 /.babelrc
 /.deploy
+/_assets
+/src

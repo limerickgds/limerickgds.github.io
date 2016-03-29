@@ -36,9 +36,12 @@ var config = {
             ]
         },
         build: {
-            src: assets + '/**/*',
-            dest: buildAssets
+
         }
+    },
+    build: {
+        src: assets + '/**/*',
+        dest: buildAssets
     },
     clean: {
         src: [development, assets, buildAssets]
@@ -103,10 +106,6 @@ var config = {
         sass:    developmentAssets + '/styles/**/*.{sass,scss}',
         scripts: developmentAssets + '/scripts/**/*.js',
         images:  developmentAssets + '/images/**/*'
-    },
-    build: {
-        src: assets,
-        dest: buildAssets
     }
 };
 
