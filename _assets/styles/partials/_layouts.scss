@@ -1,0 +1,114 @@
+
+body{
+    background-color: #f9f9f9 none repeat scroll 0 0;
+}
+
+// 头部布局 start
+.header{
+    display: block;
+    position: relative;
+    width: 100%;
+    >.header-logo-name{
+        display: block;
+        max-width: 30rem;
+        text-align: left;
+        padding: 1rem 0.5rem;
+        background-color: #eee;
+    }
+}
+
+.#{$blog-css-prefix}-img{
+    border: 1px solid #eee;
+    display: inline-block;
+    opacity: 0.7;
+    padding: 5px;
+    transition: opacity 0.2s ease 0s;
+}
+
+.header-logo{
+    display: inline-block;
+    width: 6rem;
+    height: 6rem;
+    text-align: center;
+}
+
+#default{
+    .#{$blog-css-prefix}-img{
+        border: none;
+        vertical-align: middle;
+    }
+    .header-logo{
+        width: 2rem;
+        height: 2rem;
+    }
+    .#{$blog-css-prefix}-img:hover{
+        border: none;
+    }
+    .#{$blog-css-prefix}-name{
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 0.5rem;
+    }
+}
+
+.#{$blog-css-prefix}-img:hover{
+    border: 1px solid #a1a1a1;
+}
+
+.#{$blog-css-prefix}-name{
+    font-size: 1.5rem;
+}
+
+// 头布局 end
+
+// 页面内容布局 start
+.container{
+    display: block;
+    position: relative;
+    width: 32rem;
+    padding: 1.2rem;
+    margin: auto;
+}
+
+//文章浏览布局 start
+.page-content {
+    position: absolute;
+    left: 200px;
+    right: 0;
+}
+.page-sidebar{
+    width: 200px;
+}
+//文章浏览布局end
+
+.pull-left{
+    float: left;
+}
+
+.pull-right{
+    float: right;
+}
+.underline{
+    border-bottom: 2px solid #e1e1e1;
+}
+
+.underline:hover{
+    border-bottom:  2px solid #{$font-color-red};
+}
+.claerfix{
+    zoom: 1;
+}
+.clearfix:after{
+    content: '';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+//页面内容布局 end
+
+//页脚布局 start
+.#{$blog-css-prefix}-footer{
+    margin-top: 0.75rem;
+    border-top: 1px solid #ccc;
+}
+//页脚布局 end

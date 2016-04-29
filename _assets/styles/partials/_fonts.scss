@@ -1,0 +1,23 @@
+
+.faded{
+    color: #{$font-color-faded};
+    font-weight: lighter;
+}
+
+.red{
+    color: #{$font-color-red};
+    font-weight: lighter;
+}
+
+.post-title{
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.underline{
+    border-bottom: 2px solid #e1e1e1;
+}
+.post-time{
+    font-size: 1.2rem;
+    color: #e1e1e1;
+}
