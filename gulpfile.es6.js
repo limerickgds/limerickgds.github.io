@@ -10,7 +10,7 @@ import stylish from 'jshint-stylish';
 const $ = gulpLoadPlugins();
 
 //启动本地serve
-gulp.task('browsersync',['serve'],() => {browsersync(config.browsersync.development);})
+gulp.task('browsersync',['serve'],() => {browsersync(config.browsersync.development);});
 
 /**
  *  运行部分task，生成调试文件
@@ -31,14 +31,14 @@ gulp.task('serve', (cb) => {
 });
 
 /**
- * 将assets生成的文件，拷贝到_assets中
+ * 将assets生成的文件，拷贝到_assets中 暂时去掉
  */
 
-gulp.task('build', ['serve'], (cb) => {
-    return gulp.src(config.build.src)
-        .pipe(gulp.dest(config.build.dest))
-        .on('close',cb);
- });
+// gulp.task('build', ['serve'], (cb) => {
+//     return gulp.src(config.build.src)
+//         .pipe(gulp.dest(config.build.dest))
+//         .on('close',cb);
+//  });
 
 
 /**
