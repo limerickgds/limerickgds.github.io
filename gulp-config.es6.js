@@ -2,9 +2,8 @@ const app               = '.';
 const bower             = './bower_components';
 const src               = './src';
 const development       = './src/development';  //调试环境Jekyll生成的文件目录
-const developmentAssets = './_assets';    // 调试环境 assets
-const assets            = './src/assets';     // blog  assets 目录
-const buildAssets       = './assets';
+const developmentAssets = './src/assets';    // 调试环境 assets
+const assets            = './_assets';     // blog  assets 目录
 
 var config = {
     autoprefixer: {
@@ -24,7 +23,7 @@ var config = {
             server: {
                 baseDir: [
                     development,
-                    src
+                    app
                 ]
             },
             port: 9999,
@@ -39,12 +38,8 @@ var config = {
 
         }
     },
-    build: {
-        src: assets + '/**/*',
-        dest: buildAssets
-    },
     clean: {
-        src: [development, assets, buildAssets]
+        src: [development, assets]
     },
     fonts: {
         src: developmentAssets + '/fonts/*',

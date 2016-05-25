@@ -1,5 +1,9 @@
 .inline-list{
-    
+    display: block;
+    width: 100%;
+    >li{
+        display: inline-block;
+    }
 }
 .post-list{
     display: block;

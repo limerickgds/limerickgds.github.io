@@ -1,6 +1,6 @@
 
 body{
-    background-color: #f9f9f9 none repeat scroll 0 0;
+    background-color: #eee;
 }
 
 // 头部布局 start
@@ -110,5 +110,14 @@ body{
 .#{$blog-css-prefix}-footer{
     margin-top: 0.75rem;
     border-top: 1px solid #ccc;
+    .inline-list{
+        text-align: center;
+        height: 45px;
+        line-height: 45px;
+        margin: 0;
+        li{
+            margin: 0 20px;
+        }
+    }
 }
 //页脚布局 end
