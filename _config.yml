@@ -3,8 +3,8 @@ title: limerick
 email: guods2015@gmail.com
 description: "limerick's blog."
 baseurl: "/"
-url: "http://localhost:9999"
-# url: "http://limerickgds.github.io"
+# url: "http://localhost:9999"
+url: "http://limerickgds.github.io"
 
 # Build settings
 # markdown: redcarpet
