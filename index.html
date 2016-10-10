@@ -1,17 +1,22 @@
----
-layout: homepage
-title: limerick's blog
+--- 
+layout: homepage 
+title: limerick's blog 
 ---
 <div class="container">
     <ul class="post-list">
         {% for post in site.posts %}
-        <li class="post-li clearfix">
-            <span class="post-title pull-left">
-                <a class="underline" href="{{ post.url }}">{{post.title}}</a>
-            </span>
-
-            <span class="post-time pull-right" >{{post.date | date:'%B %d, %Y'}}</span>
+        <li class="post-li">
+            <div class="post-li-hd clearfix">
+                <span class="post-title pull-left">
+                    <a class="underline" href="{{ post.url }}">{{post.title}}</a>
+                </span>
+                <span class="post-time pull-right">{{post.date | date:'%B %d, %Y'}}</span>
+            </div>
+            <div class="post-li-content">
+               {{post.content}}
+            </div>
         </li>
         {% endfor %}
     </ul>
 </div>
+{{site.posts[0].content}}

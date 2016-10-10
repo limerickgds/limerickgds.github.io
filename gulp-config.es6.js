@@ -1,9 +1,9 @@
 const app               = '.';
 const bower             = './bower_components';
 const src               = './src';
-const development       = './src/development';  //调试环境Jekyll生成的文件目录
-const developmentAssets = './src/assets';    // 调试环境 assets
-const assets            = './_assets';     // blog  assets 目录
+const development       = './.dev';  //调试环境Jekyll生成的文件目录
+const srcAssets         = './src/assets';    // 调试环境 assets
+const assets            = './assets';     // blog  assets 目录
 
 var config = {
     autoprefixer: {
@@ -19,69 +19,77 @@ var config = {
         cascade: true
     },
     browsersync: {
-        development: {
-            server: {
-                baseDir: [
-                    development,
-                    app
-                ]
-            },
-            port: 9999,
-            files: [
-                assets + '/styles/*.css',
-                assets + '/scripts/*.js',
-                assets + '/images/**',
-                assets + '/fonts/*'
+        server: {
+            baseDir: [
+                development
             ]
         },
-        build: {
-
-        }
+        port: 9999
+            // files: [
+            //     assets + '/styles/*.css',
+            //     assets + '/scripts/*.js',
+            //     assets + '/images/**',
+            //     assets + '/fonts/*'
+            // ]
     },
     clean: {
-        src: [development, assets]
+        dev: development,
+        build: assets
     },
     fonts: {
-        src: developmentAssets + '/fonts/*',
-        dest: assets + '/fonts'
+        src: srcAssets + '/fonts/*',
+        dest: {
+          dev: development + '/assets/fonts',
+          build: assets + '/fonts'
+        }
     },
     images: {
-        src:  developmentAssets + '/images/**/*',
-        dest: assets + '/images'
+        src:  srcAssets + '/images/**/*',
+        dest: {
+          dev: development + '/assets/images',
+          build: assets + '/images'
+        }
     },
     jekyll: {
-        development: {
-            src: app,
-            dest: development,
-            config: './_config.yml'
-       }
+        src: app,
+        dest: development,
+        config: './_config.yml'
     },
     jshint: {
-        src: developmentAssets + '/scripts/*.js'
+        src: srcAssets + '/scripts/*.js'
     },
     scripts: {
         babel: {
-            src: developmentAssets + '/scripts/**/*.js',
-            dest: assets + '/scripts',
+            src: srcAssets + '/scripts/**/*.js',
+            dest: {
+              dev: development + '/assets/scripts',
+              build: assets + '/scripts'
+            },
             options: {
                 presets: ['es2015']
             }
         }
     },
     styles: {
-        src: developmentAssets + '/styles/*.css',
-        dest:  assets + '/styles',
+        src: srcAssets + '/styles/*.css',
+        dest: {
+          dev: development + '/assets/styles',
+          build: assets + '/styles'
+        }
     },
     scsslint: {
         src: [
-            developmentAssets + '/styles/**/*.{sass,scss}'
+            srcAssets + '/styles/**/*.{sass,scss}'
         ],
         options: {
         }
     },
     sass: {
-        src: developmentAssets + '/styles/*.{scss,sass}',
-        dest:  assets + '/styles',
+        src: srcAssets + '/styles/*.{scss,sass}',
+        dest: {
+          dev: development + '/assets/styles',
+          build: assets + '/styles'
+        },
         options: {
             noCache: true,
             compass: false,
@@ -98,9 +106,9 @@ var config = {
             app + '/_posts/*.{markdown,md}',
             app + '/*.{html,markdown,md,yml,json,txt,xml}',
         ],
-        sass:    developmentAssets + '/styles/**/*.{sass,scss}',
-        scripts: developmentAssets + '/scripts/**/*.js',
-        images:  developmentAssets + '/images/**/*'
+        sass:    srcAssets + '/styles/**/*.{sass,scss}',
+        scripts: srcAssets + '/scripts/**/*.js',
+        images:  srcAssets + '/images/**/*'
     }
 };
 
