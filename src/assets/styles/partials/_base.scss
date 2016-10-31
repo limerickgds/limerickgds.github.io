@@ -7,12 +7,12 @@ html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-    font-size: 62.5%;
+    font-size: 75%;
 }
 
 body {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 article,
@@ -71,7 +71,7 @@ a:hover {
 }
 
 abbr[title] {
-  border-bottom: none; /* 1 */
+  border-bottom: none;
   text-decoration: underline;
   text-decoration: underline dotted;
 }
@@ -92,8 +92,8 @@ dfn {
 
 
 h1 {
-  font-size: 2rem;
-  margin: 0.67rem 0;
+  font-size: 1.6rem;
+  margin: 0.2rem 0;
 }
 
 mark {

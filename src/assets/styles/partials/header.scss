@@ -1,0 +1,30 @@
+// 头部布局 start
+.#{$blog-css-prefix}-header{
+    display: block;
+    position: relative;
+    width: 100%;
+    >.#{$blog-css-prefix}-header-logo{
+        display: block;
+        padding: 1rem 0.5rem;
+        text-align: center;
+    }
+}
+#homepage .#{$blog-css-prefix}-header{
+    background: url('/assets/images/header-bg.jpeg')  0 0 /100% 100% no-repeat; 
+    .header-logo-name{
+        text-align: center;
+    }
+    padding: 1rem;
+}
+.#{$blog-css-prefix}-header-img-container{
+    border: 1px solid #eee;
+    display: inline-block;
+    padding: 0.4rem;
+}
+
+.#{$blog-css-prefix}-header-img{
+    display: inline-block;
+    width: 4rem;
+    height: 4rem;
+    text-align: center;
+}

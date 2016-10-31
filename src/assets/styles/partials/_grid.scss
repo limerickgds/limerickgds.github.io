@@ -1,24 +1,24 @@
 
-@media only screen and (min-width: 481px) {
+@media only screen and (min-width: 414px) {
     html{
-        font-size: 94% !important;
-    }
-}
-
-@media only screen and (min-width: 561px) {
-    html{
-        font-size: 109% !important;
+        font-size: 87.5% !important;
     }
 }
 
 @media only screen and (min-width: 641px) {
     html{
-        font-size: 125% !important;
+        font-size: 122.5% !important;
     }
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (min-width: 720px) {
     .page-sidebar{
         display: none;
+    }
+}
+
+@media only screen and (min-width: 720px){
+    .container{
+        width: 80%!important;
     }
 }

@@ -3,35 +3,6 @@ body{
     background-color: #eee;
 }
 
-// 头部布局 start
-.header{
-    display: block;
-    position: relative;
-    width: 100%;
-    >.header-logo-name{
-        display: block;
-        max-width: 30rem;
-        text-align: left;
-        padding: 1rem 0.5rem;
-        background-color: #eee;
-    }
-}
-
-.#{$blog-css-prefix}-img{
-    border: 1px solid #eee;
-    display: inline-block;
-    opacity: 0.7;
-    padding: 5px;
-    transition: opacity 0.2s ease 0s;
-}
-
-.header-logo{
-    display: inline-block;
-    width: 6rem;
-    height: 6rem;
-    text-align: center;
-}
-
 #default{
     .#{$blog-css-prefix}-img{
         border: none;
@@ -48,11 +19,14 @@ body{
         display: inline-block;
         vertical-align: middle;
         font-size: 0.5rem;
+        &:hover{
+            color: #{$primary-color-light};
+        }
     }
 }
 
 .#{$blog-css-prefix}-img:hover{
-    border: 1px solid #a1a1a1;
+    border: 1px solid #{$primary-color-light};
 }
 
 .#{$blog-css-prefix}-name{
@@ -65,16 +39,14 @@ body{
 .container{
     display: block;
     position: relative;
-    width: 32rem;
+    width: 24rem;
     padding: 1.2rem;
     margin: auto;
 }
 
 //文章浏览布局 start
 .page-content {
-    position: absolute;
-    left: 200px;
-    right: 0;
+    position: relative;
 }
 .page-sidebar{
     width: 200px;
@@ -89,7 +61,7 @@ body{
     float: right;
 }
 .underline{
-    border-bottom: 2px solid #e1e1e1;
+    border-bottom: 2px solid #{$font-color-faded};
 }
 
 .underline:hover{
@@ -112,11 +84,11 @@ body{
     border-top: 1px solid #ccc;
     .inline-list{
         text-align: center;
-        height: 45px;
-        line-height: 45px;
+        height: 2rem;
+        line-height: 2rem;
         margin: 0;
         li{
-            margin: 0 20px;
+            margin: 0 1rem;
         }
     }
 }

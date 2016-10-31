@@ -1,5 +1,8 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import gifsicle from 'imagemin-gifsicle';
+import pngquant from 'imagemin-pngquant';
+import jpegtran from 'imagemin-jpegtran';
 import browsersync from 'browser-sync';
 import lazypipe from 'lazypipe';
 import runSequence from 'run-sequence';
@@ -10,8 +13,8 @@ import stylish from 'jshint-stylish';
 const $ = gulpLoadPlugins();
 
 //启动本地serve
-gulp.task('browsersync',() => {
-  browsersync(config.browsersync);
+gulp.task('browsersync', () => {
+    browsersync(config.browsersync);
 });
 
 
@@ -22,7 +25,7 @@ gulp.task('browsersync',() => {
 gulp.task('clean', (cb) => {
     return gulp.src(config.clean.build)
         .pipe($.clean())
-        .on('close',cb);;
+        .on('close', cb);;
 });
 
 /**
@@ -31,7 +34,7 @@ gulp.task('clean', (cb) => {
 gulp.task('clean:dev', (cb) => {
     return gulp.src(config.clean.dev)
         .pipe($.clean())
-        .on('close',cb);;
+        .on('close', cb);;
 });
 
 /**
@@ -40,11 +43,11 @@ gulp.task('clean:dev', (cb) => {
 gulp.task('jekyll', (done) => {
     browsersync.notify('Compiling jekyll!');
     let jekyllConfig = config.jekyll;
-    return child_process.spawn('bundle', ['exec', 'jekyll', 'build', '-q', '--source='+jekyllConfig.src, '--destination=' + jekyllConfig.dest, '--config=' + jekyllConfig.config], { stdio: 'inherit'})
-    .on('close', done);
+    return child_process.spawn('bundle', ['exec', 'jekyll', 'build', '-q', '--source=' + jekyllConfig.src, '--destination=' + jekyllConfig.dest, '--config=' + jekyllConfig.config], { stdio: 'inherit' })
+        .on('close', done);
 });
 
-gulp.task('jekyll:rebuild',['jekyll'], () => {
+gulp.task('jekyll:rebuild', ['jekyll'], () => {
     browsersync.reload();
 });
 
@@ -54,7 +57,16 @@ gulp.task('jekyll:rebuild',['jekyll'], () => {
 gulp.task('images', () => {
     let imagesConfig = config.images;
     return gulp.src(imagesConfig.src)
-         .pipe(gulp.dest(imagesConfig.dest.build));
+        .pipe($.imagemin(
+            [   gifsicle({interlaced: true}),
+                jpegtran({ progressive: true }),
+                pngquant()
+            ], {
+                optimizationLevel: 5,
+                verbose: true 
+            }
+        ))
+        .pipe(gulp.dest(imagesConfig.dest.build));
 });
 /**
  * images:dev
@@ -62,7 +74,7 @@ gulp.task('images', () => {
 gulp.task('images:dev', () => {
     let imagesConfig = config.images;
     return gulp.src(imagesConfig.src)
-         .pipe(gulp.dest(imagesConfig.dest.dev));
+        .pipe(gulp.dest(imagesConfig.dest.dev));
 });
 /**
  * fonts
@@ -82,29 +94,19 @@ gulp.task('fonts:dev', () => {
         .pipe(gulp.dest(fontsConfig.dest.dev));
 })
 
- /**
-  *  watch
-  */
-gulp.task('watch', () => {
-    gulp.watch(config.watch.jekyll,  ['jekyll:rebuild']);
-    gulp.watch(config.watch.sass,    ['sass', 'scsslint']);
-    gulp.watch(config.watch.scripts, ['scripts', 'jshint']);
-    gulp.watch(config.watch.images,  ['images']);
-});
-
 /**
  * 将styles中的css文件压缩复制，已压缩文件直接复制
  */
 gulp.task('styles', () => {
     let stylesConfig = config.styles;
-    const filter = $.filter(['*.css','!*.min.css'],{restore: true});
+    const filter = $.filter(['*.css', '!*.min.css'], { restore: true });
 
     return gulp.src(stylesConfig.src)
         .pipe($.sourcemaps.init())
         .pipe(filter)
-        .pipe($.cleanCss({keepSpecialComments : 0}))
-        .pipe($.rename({extname: '.min.css'}))
-        .pipe($.sourcemaps.write('.',{ includeContent: false, sourceRoot: '_assets/styles'}))
+        .pipe($.cleanCss({ keepSpecialComments: 0 }))
+        .pipe($.rename({ extname: '.min.css' }))
+        .pipe($.sourcemaps.write('.', { includeContent: false, sourceRoot: '_assets/styles' }))
         .pipe(filter.restore())
         .pipe(gulp.dest(stylesConfig.dest.build));
 });
@@ -114,11 +116,11 @@ gulp.task('styles', () => {
  */
 gulp.task('styles:dev', () => {
     let stylesConfig = config.styles;
-    const filter = $.filter(['*.css','!*.min.css'],{restore: true});
+    const filter = $.filter(['*.css', '!*.min.css'], { restore: true });
 
     return gulp.src(stylesConfig.src)
         .pipe(filter)
-        .pipe($.rename({extname: '.min.css'}))
+        .pipe($.rename({ extname: '.min.css' }))
         .pipe(filter.restore())
         .pipe(gulp.dest(stylesConfig.dest.dev));
 });
@@ -126,11 +128,11 @@ gulp.task('styles:dev', () => {
 /**
  *  scss 转化为css ，并且声称map文件，进行压缩
  */
-gulp.task('sass',() => {
+gulp.task('sass', () => {
     let sassConfig = config.sass;
     sassConfig.options.onError = browsersync.notify;
 
-    const filter = $.filter(['**/*.css','!**/*.map'],{restore: true});
+    const filter = $.filter(['**/*.css', '!**/*.map'], { restore: true });
     browsersync.notify('Compiling sass!');
     // 使用的是rubysass ,gem需要安装 sass，如果使用bundle install无法安装，直接使用gem安装
     return $.rubySass(sassConfig.src, sassConfig.options)
@@ -138,9 +140,9 @@ gulp.task('sass',() => {
         .pipe($.sourcemaps.init())
         .pipe($.autoprefixer(config.autoprefixer))
         .pipe(filter)
-        .pipe($.cleanCss({keepSpecialComments : 0}))
-        .pipe($.rename({extname: '.min.css'}))
-        .pipe($.sourcemaps.write('.',{ includeContent: false}))
+        .pipe($.cleanCss({ keepSpecialComments: 0 }))
+        .pipe($.rename({ extname: '.min.css' }))
+        .pipe($.sourcemaps.write('.', { includeContent: false }))
         .pipe(filter.restore())   //这里filter.restore要使用()，官网上的没有，会报错
         .pipe(gulp.dest(sassConfig.dest.build));
 });
@@ -148,11 +150,11 @@ gulp.task('sass',() => {
 /**
  *  scss 转化为css ，并且声称map文件，进行压缩
  */
-gulp.task('sass:dev',() => {
+gulp.task('sass:dev', () => {
     let sassConfig = config.sass;
     sassConfig.options.onError = browsersync.notify;
 
-    const filter = $.filter(['**/*.css','!**/*.map'],{restore: true});
+    const filter = $.filter(['**/*.css', '!**/*.map'], { restore: true });
     browsersync.notify('Compiling sass!');
     // 使用的是rubysass ,gem需要安装 sass，如果使用bundle install无法安装，直接使用gem安装
     return $.rubySass(sassConfig.src, sassConfig.options)
@@ -160,8 +162,8 @@ gulp.task('sass:dev',() => {
         .pipe($.sourcemaps.init())
         .pipe($.autoprefixer(config.autoprefixer))
         .pipe(filter)
-        .pipe($.rename({extname: '.min.css'}))
-        .pipe($.sourcemaps.write('.',{ includeContent: false}))
+        .pipe($.rename({ extname: '.min.css' }))
+        .pipe($.sourcemaps.write('.', { includeContent: false }))
         .pipe(filter.restore())   //这里filter.restore要使用()，官网上的没有，会报错
         .pipe(gulp.dest(sassConfig.dest.dev));
 });
@@ -189,27 +191,38 @@ gulp.task('jshint', () => {
 /**
  * es6转化为es5,并进行压缩
  */
-gulp.task('scripts', (done) =>{
+gulp.task('scripts', (done) => {
     let babelConfig = config.scripts.babel;
     return gulp.src(babelConfig.src)
         .pipe($.babel(babelConfig.options))
         .pipe($.uglify())
-        .pipe($.rename({extname: '.min.js'}))
+        .pipe($.rename({ extname: '.min.js' }))
         .pipe(gulp.dest(babelConfig.dest.build))
-        .on('close',done);
+        .on('close', done);
 });
 
 /**
  * es6转化为es5,并进行压缩
  */
-gulp.task('scripts:dev', (done) =>{
+gulp.task('scripts:dev', (done) => {
     let babelConfig = config.scripts.babel;
     return gulp.src(babelConfig.src)
         .pipe($.babel(babelConfig.options))
         .pipe($.uglify())
-        .pipe($.rename({extname: '.min.js'}))
+        .pipe($.rename({ extname: '.min.js' }))
         .pipe(gulp.dest(babelConfig.dest.dev))
-        .on('close',done);
+        .on('close', done);
+});
+
+
+/**
+ *  watch
+ */
+gulp.task('watch', () => {
+    gulp.watch(config.watch.jekyll, ['jekyll:rebuild']);
+    gulp.watch(config.watch.sass, ['sass:dev', 'scsslint']);
+    gulp.watch(config.watch.scripts, ['scripts:dev', 'jshint']);
+    gulp.watch(config.watch.images, ['images:dev']);
 });
 
 /**
@@ -218,29 +231,29 @@ gulp.task('scripts:dev', (done) =>{
 
 gulp.task('dev', (cb) => {
     runSequence('clean:dev',
-    [
-        'jekyll',
-        'styles:dev',
-        'sass:dev',
-        'scripts:dev',
-        'images:dev',
-        'fonts:dev'
-    ],
-    'browsersync',
-    'watch',
-    // 'base64',
-    cb);
+        [
+            'jekyll',
+            'styles:dev',
+            'sass:dev',
+            'scripts:dev',
+            'images:dev',
+            'fonts:dev'
+        ],
+        'browsersync',
+        'watch',
+        // 'base64',
+        cb);
 });
 
 gulp.task('build', (cb) => {
-  runSequence('clean',
-  [
-      'styles',
-      'sass',
-      'scripts',
-      'images',
-      'fonts'
-  ],
-  // 'base64',
-  cb);
+    runSequence('clean',
+        [
+            'styles',
+            'sass',
+            'scripts',
+            'images',
+            'fonts'
+        ],
+        // 'base64',
+        cb);
 });

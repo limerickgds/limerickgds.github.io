@@ -10,14 +10,17 @@
 }
 
 .post-title{
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
     color: #000;
 }
 
 .underline{
-    border-bottom: 2px solid #e1e1e1;
+    border-bottom: 2px solid #{$divider-color};
 }
 .post-time{
-    font-size: 1.2rem;
-    color: #e1e1e1;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    vertical-align: middle;
+    color: #{$secondary-text-color};
 }
