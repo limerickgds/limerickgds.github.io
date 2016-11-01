@@ -7,7 +7,16 @@ baseurl: "/"
 url: "http://limerickgds.github.io"
 
 # Build settings
+highlight: pygments
 markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: false
+  syntax_highlighter: rouge
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  enable_coderay: false
 permalink: pretty
 exclude: [node_modules, bower_components, bower.json, Gemfile, Gemfile.lock, gulp-config.es6.js, gulpfile.es6.js, gulpfile.js, package.json, params.json]
 
