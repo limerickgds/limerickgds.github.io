@@ -126,7 +126,7 @@ gulp.task('styles:dev', () => {
 });
 
 /**
- *  scss 转化为css ，并且声称map文件，进行压缩
+ *  scss 转化为css ，并且生成map文件，进行压缩
  */
 gulp.task('sass', () => {
     let sassConfig = config.sass;
@@ -148,7 +148,7 @@ gulp.task('sass', () => {
 });
 
 /**
- *  scss 转化为css ，并且声称map文件，进行压缩
+ *  scss 转化为css ，并且生成map文件，进行压缩
  */
 gulp.task('sass:dev', () => {
     let sassConfig = config.sass;

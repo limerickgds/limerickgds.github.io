@@ -7,7 +7,7 @@ baseurl: "/"
 url: "http://limerickgds.github.io"
 
 # Build settings
-# markdown: redcarpet
+markdown: kramdown
 permalink: pretty
 exclude: [node_modules, bower_components, bower.json, Gemfile, Gemfile.lock, gulp-config.es6.js, gulpfile.es6.js, gulpfile.js, package.json, params.json]
 

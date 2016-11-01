@@ -30,7 +30,8 @@ body{
 }
 
 .#{$blog-css-prefix}-name{
-    font-size: 1.5rem;
+    font-size: 1rem;
+    margin: 0.4rem auto;
 }
 
 // 头布局 end
@@ -39,16 +40,20 @@ body{
 .container{
     display: block;
     position: relative;
-    width: 24rem;
+    width: 16rem;
     padding: 1.2rem;
     margin: auto;
 }
 
 //文章浏览布局 start
-.page-content {
+.page-content{
     position: relative;
+    width: 80%;
+    margin: 0 auto;
 }
+
 .page-sidebar{
+    display: none;
     width: 200px;
 }
 //文章浏览布局end
@@ -84,8 +89,8 @@ body{
     border-top: 1px solid #ccc;
     .inline-list{
         text-align: center;
-        height: 2rem;
-        line-height: 2rem;
+        height: 0.6rem;
+        line-height: 0.6rem;
         margin: 0;
         li{
             margin: 0 1rem;

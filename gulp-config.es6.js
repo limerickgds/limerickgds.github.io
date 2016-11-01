@@ -24,7 +24,10 @@ var config = {
                 development
             ]
         },
-        port: 9999
+        port: 9999,
+        ui: {
+            port: 9998
+        }
             // files: [
             //     assets + '/styles/*.css',
             //     assets + '/scripts/*.js',
