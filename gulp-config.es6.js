@@ -28,12 +28,6 @@ var config = {
         ui: {
             port: 9998
         }
-            // files: [
-            //     assets + '/styles/*.css',
-            //     assets + '/scripts/*.js',
-            //     assets + '/images/**',
-            //     assets + '/fonts/*'
-            // ]
     },
     clean: {
         dev: development,

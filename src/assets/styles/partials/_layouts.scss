@@ -56,6 +56,16 @@ body{
     display: none;
     width: 200px;
 }
+
+.#{$blog-css-prefix}-paginator{
+    text-align: center;
+    .page-item{
+        margin: 0.25rem;
+        &.active{
+            color: $accent-color
+        }
+    }
+}
 //文章浏览布局end
 
 .pull-left{

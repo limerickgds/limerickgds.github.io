@@ -1,6 +1,7 @@
 ---
 layout: default
 title: angularjs双向绑定
+keywords: angularjs，Two-way Data Binding,双向绑定
 ---
 
 # angularjs双向绑定

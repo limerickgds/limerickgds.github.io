@@ -13,9 +13,19 @@
 .post-li{
     display: block;
     width: 100%;
-    margin: 1.5rem 0;
+    overflow: hidden;
+    margin: 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px dashed $primary-color-dark;
+    &:last-child{
+        border-bottom: none;
+    }
 }
 .post-li-hd{
     display: block;
     margin-bottom: 1rem;
+}
+.post-a{
+    font-size: 0.6rem;
+    color: $primary-color;
 }
