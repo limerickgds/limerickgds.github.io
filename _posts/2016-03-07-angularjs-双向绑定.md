@@ -2,6 +2,7 @@
 layout: default
 title: angularjs双向绑定
 keywords: angularjs，Two-way Data Binding,双向绑定
+excerpt_separator: <!--more-->
 ---
 
 # angularjs双向绑定
@@ -37,6 +38,8 @@ keywords: angularjs，Two-way Data Binding,双向绑定
 ```javascript
    $new,$digest,$watch,$watchGroup,$watchCollection,$apply,$destroy,$eval,$on,$emit,$broadcast。
 ```
+
+<!--more-->
 
 具体就不一 一介绍了。涉及到数据绑定相关的主要分为三类。
 
