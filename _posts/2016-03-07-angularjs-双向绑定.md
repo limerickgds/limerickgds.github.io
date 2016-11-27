@@ -5,11 +5,10 @@ keywords: angularjs，Two-way Data Binding,双向绑定
 excerpt_separator: <!--more-->
 ---
 
-# angularjs双向绑定
 把之前学到ng的一些东西和大家分享一下。首先要讲的就是ng最重要的一个特性，双向绑定。（angular源码全部是1.5.0版本）
 
 
-## 双向绑定例子
+### 双向绑定例子
 
 那么一个双向绑定的代码是什么样子。来看ng官网上的例子，代码就是这么简单。
 
@@ -31,7 +30,7 @@ excerpt_separator: <!--more-->
 </div>
 ```
 
-## ng如何实现双向绑定
+### ng如何实现双向绑定
 
 但是ng是如何实现双向绑定？我们可以看到双向绑定的数据都是$scope的属性。而$scope是$rootScopeProvider生成的一个实例。在ng代码中中，Scope原型链上主要有以下几个方法:
 
