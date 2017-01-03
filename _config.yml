@@ -21,7 +21,7 @@ permalink: pretty
 exclude: [node_modules, bower_components, bower.json, Gemfile, Gemfile.lock, gulp-config.es6.js, gulpfile.es6.js, gulpfile.js, package.json, params.json]
 
 
-paginate: 5
+paginate: 10
 paginate_path: "page:num"
 
 #sass:
