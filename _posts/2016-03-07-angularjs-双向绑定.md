@@ -7,6 +7,7 @@ excerpt_separator: <!--more-->
 
 把之前学到ng的一些东西和大家分享一下。首先要讲的就是ng最重要的一个特性，双向绑定。（angular源码全部是1.5.0版本）
 
+<!--more-->
 
 ### 双向绑定例子
 
@@ -37,8 +38,6 @@ excerpt_separator: <!--more-->
 ```javascript
    $new,$digest,$watch,$watchGroup,$watchCollection,$apply,$destroy,$eval,$on,$emit,$broadcast。
 ```
-
-<!--more-->
 
 具体就不一 一介绍了。涉及到数据绑定相关的主要分为三类。
 
