@@ -40,7 +40,8 @@ body{
 .container{
     display: block;
     position: relative;
-    width: 16rem;
+    width: 90%;
+    max-width: 640px;
     padding: 1.2rem;
     margin: auto;
 }
@@ -49,6 +50,7 @@ body{
 .page-content{
     position: relative;
     width: 80%;
+    max-width: 750px;
     margin: 0 auto;
 }
 

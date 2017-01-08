@@ -18,7 +18,8 @@
     }
 }
 #homepage .#{$blog-css-prefix}-header{
-    background: url('/assets/images/header-bg.jpeg')  0 0 /100% 100% no-repeat; 
+    /*TODO: 暂时去掉*/
+    /*background: url('/assets/images/header-bg.jpeg')  0 0 /100% 100% no-repeat; */
     .header-logo-name{
         text-align: center;
     }
