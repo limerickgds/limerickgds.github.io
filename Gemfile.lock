@@ -135,6 +135,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  jekyll
   jekyll-paginate (>= 1.1.0)
   jekyll-sitemap (>= 0.11.0)
   sass (>= 3.4.21)
