@@ -1,19 +1,44 @@
 <!DOCTYPE html>
 <html>
 
-  {% include head.html %}
+{% include head.html %}
 
-    <body id="default">
+<body id="default">
     {% include header.html %}
     <div class="page-content">
-      <div class="wrap markdown-body">
-        <h2>{{ page.title }}</h2>
-        {{ content }}
-      </div>
+        <div class="wrap markdown-body">
+            <h2>{{ page.title }}</h2>
+            {{ content }}
+        </div>
+        {% if site.duoshuo_username %}
+        <!-- 多说评论框 start -->
+        <div class="ds-thread" data-thread-key="{{ page.id }}" data-title="{{ page.title }}" data-url="{{ page.url }}"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start -->
+        <script type="text/javascript">
+            var duoshuoQuery = {
+                short_name: "{{ site.duoshuo_username }}"
+            };
+            (function () {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                    '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] ||
+                    document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+
+        </script>
+        <!-- 多说公共JS代码 end -->
+        {% endif %}
     </div>
     <div class="page-sidebar">
-    {% include sidebar.html %}
+        {% include sidebar.html %}
     </div>
-      {% include footer.html %}
-    </body>
+
+    {% include footer.html %}
+</body>
+
 </html>

@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html>
-    {% include head.html %}
-    <body id="homepage">
-        {% include header.html %}
-        {{ content }}
-        {% include paginator.html %}
-        {% include footer.html %}
-    </body>
-    <!-- <script  src="{{"/requirejs/require.js"|"//cdn.bootcss.com/require.js/2.1.22/require.min.js"}}"></script>
-    <script type="text/javascript">
-        requirejs.config({
-            baseUrl: '',
-            paths: {
+{% include head.html %}
 
-            }
-        });
-    </script> -->
-    <script src="/assets/scripts/main.min.js"></script>
+<body id="homepage">
+    {% include header.html %}
+    {{ content }}
+    {% include paginator.html %}
+    {% include footer.html %}
+</body>
 </html>

@@ -3,23 +3,23 @@ title: limerick
 email: guods2015@gmail.com
 description: "limerick's blog."
 baseurl: "/"
-# url: "http://localhost:9999"
-url: "http://limerickgds.github.io"
+url: "https://limerickgdsweb.com"
 
 # Build settings
 highlight: rouge
 markdown: kramdown
 kramdown:
   input: GFM
-  auto_ids: false
-  syntax_highlighter: rouge
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  enable_coderay: false
+
 permalink: pretty
 exclude: [node_modules, bower_components, bower.json, Gemfile, Gemfile.lock, gulp-config.es6.js, gulpfile.es6.js, gulpfile.js, package.json, params.json]
 
+# Google Analytics
+ga_id: 'UA-92795568-1'         
+ga_domain: limerickgdsweb.com
+
+# Duoshuo settings
+duoshuo_username: limerick
 
 paginate: 10
 paginate_path: "page:num"
