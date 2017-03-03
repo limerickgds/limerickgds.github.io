@@ -6,10 +6,11 @@ baseurl: "/"
 url: "https://limerickgdsweb.com"
 
 # Build settings
-highlight: rouge
 markdown: kramdown
+
 kramdown:
   input: GFM
+  hard_wrap: false
 
 permalink: pretty
 exclude: [node_modules, bower_components, bower.json, Gemfile, Gemfile.lock, gulp-config.es6.js, gulpfile.es6.js, gulpfile.js, package.json, params.json]

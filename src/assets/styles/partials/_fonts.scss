@@ -13,19 +13,18 @@
     font-weight: lighter;
 }
 
-.post-title{
-    font-size: 0.6rem;
-    line-height: 0.8rem;
+.post-title,{
+    font-size: 26px;
+    line-height: 32px;
     color: #000;
+}
+
+.post-time{
+    vertical-align: middle;
+    color: #{$secondary-text-color};
 }
 
 .underline{
     border-bottom: 2px solid #{$divider-color};
 }
 
-.post-time{
-    font-size: 0.4rem;
-    line-height: 0.8rem;
-    vertical-align: middle;
-    color: #{$secondary-text-color};
-}

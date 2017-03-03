@@ -1,19 +1,12 @@
 // 头部布局 start
 
-@media only screen and (min-width: 800px) {
-    .#{$blog-css-prefix}-header-img{
-        width: 2rem!important;
-        height: 2rem!important;
-    }
-}
-
 .#{$blog-css-prefix}-header{
     display: block;
     position: relative;
     width: 100%;
     >.#{$blog-css-prefix}-header-logo{
         display: block;
-        padding: 0.5rem;
+        padding: 40px;
         text-align: center;
     }
 }
@@ -28,12 +21,12 @@
 .#{$blog-css-prefix}-header-img-container{
     border: 1px solid #eee;
     display: inline-block;
-    padding: 0.4rem;
+    padding: 6px;
 }
 
 .#{$blog-css-prefix}-header-img{
     display: inline-block;
-    width: 4rem;
-    height: 4rem;
+    width: 52px;
+    height: 52px;
     text-align: center;
 }

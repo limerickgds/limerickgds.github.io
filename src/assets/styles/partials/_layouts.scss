@@ -1,16 +1,11 @@
-
-body{
-    background-color: #eee;
-}
-
 #default{
     .#{$blog-css-prefix}-img{
         border: none;
         vertical-align: middle;
     }
     .header-logo{
-        width: 2rem;
-        height: 2rem;
+        width: 32px;
+        height: 32px;
     }
     .#{$blog-css-prefix}-img:hover{
         border: none;
@@ -18,7 +13,6 @@ body{
     .#{$blog-css-prefix}-name{
         display: inline-block;
         vertical-align: middle;
-        font-size: 0.5rem;
         &:hover{
             color: #{$primary-color-light};
         }
@@ -30,8 +24,7 @@ body{
 }
 
 .#{$blog-css-prefix}-name{
-    font-size: 1rem;
-    margin: 0.4rem auto;
+    margin: 12px auto;
 }
 
 // 头布局 end
@@ -42,7 +35,7 @@ body{
     position: relative;
     width: 90%;
     max-width: 640px;
-    padding: 1.2rem;
+    padding: 20px;
     margin: auto;
 }
 
@@ -70,13 +63,6 @@ body{
 }
 //文章浏览布局end
 
-.pull-left{
-    float: left;
-}
-
-.pull-right{
-    float: right;
-}
 .underline{
     border-bottom: 2px solid #{$font-color-faded};
 }
@@ -101,11 +87,11 @@ body{
     border-top: 1px solid #ccc;
     .inline-list{
         text-align: center;
-        height: 0.6rem;
-        line-height: 0.6rem;
+        line-height: 1;
         margin: 0;
+        padding: 0;
         li{
-            margin: 0 1rem;
+            margin: 0 16px;
         }
     }
 }

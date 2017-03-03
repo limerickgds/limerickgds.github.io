@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-
-{% include head.html %}
+<head>
+  {% include head.html %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/github.min.css">
+</head>
 
 <body id="default">
     {% include header.html %}
     <div class="page-content">
-        <div class="wrap markdown-body">
+        <article class="wrap article">
             <h2>{{ page.title }}</h2>
             {{ content }}
-        </div>
+        </article>
         {% if site.duoshuo_username %}
         <!-- 多说评论框 start -->
         <div class="ds-thread" data-thread-key="{{ page.id }}" data-title="{{ page.title }}" data-url="{{ page.url }}"></div>
@@ -37,8 +39,9 @@
     <div class="page-sidebar">
         {% include sidebar.html %}
     </div>
-
     {% include footer.html %}
+    {% include analytics.html %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
-
 </html>
