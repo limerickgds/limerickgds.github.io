@@ -35,7 +35,7 @@
     "imagemin-pngquant": "^5.0.0",
     "jshint-stylish": "^1.0.0",
     "lazypipe": "^0.2.4",
-    "open": "0.0.5",
+    "open": "6.4.0",
     "require-dir": "^0.3.0",
     "rimraf": "^2.4.0",
     "run-sequence": "^1.1.1",
