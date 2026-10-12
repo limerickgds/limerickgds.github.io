@@ -1,0 +1,119 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI Agent 从演示到生产：谁能把可靠执行变成利润？ — 落地之后</title><meta name="description" content="从一笔退款的执行边界，追到每个验收任务的成本，再看三家平台如何把使用变成收入、利润与现金。"><meta name="theme-color" content="#f4f1e9"><link rel="stylesheet" href="assets/channel/style.css"><link rel="icon" href="assets/channel/favicon.svg" type="image/svg+xml"><script src="assets/channel/article.js" defer></script></head><body class="article-page"><a class="skip" href="#article-content">跳至正文</a><div class="reading-progress" aria-hidden="true"></div><header class="header"><div class="wrap header-inner"><a class="brand" href="index.html" aria-label="落地之后首页"><span class="brand-mark" aria-hidden="true">落</span><span class="brand-name">落地之后<span class="brand-sub">AFTER DEPLOYMENT</span></span></a><nav class="nav" aria-label="主导航"><a href="index.html#journal">研究</a><a href="index.html#method">方法</a><a class="optional" href="index.html#about">关于</a><a href="index.html#membership">会员提案 ↗</a></nav></div></header>
+<main class="wrap"><div class="article-top"><a class="back" href="index.html#journal">← 返回研究目录</a><div class="eyebrow" style="margin-top:27px"><span class="dot"></span> ISSUE 001 / AI AGENT / REVIEW EDITION</div><h1>AI Agent 从演示到生产：谁能把可靠执行变成利润？</h1><p class="standfirst">从一笔退款的执行边界，追到每个验收任务的成本，再看三家平台如何把使用变成收入、利润与现金。</p><div class="meta">LIMERICK · 研究样稿，AI 辅助整理 · 待作者审阅 · 2026.10.12 · 约 14 分钟</div></div><div class="article-layout"><nav class="toc" aria-label="文章目录"><div class="toc-title">CONTENTS / 文章目录</div><a href="#section-1">先把“成功”写进账本</a><a href="#section-2">一笔退款，为什么需要一套系统</a><a href="#section-3">每个验收成功任务，究竟花多少钱</a><a href="#section-4">客户省下的时间，谁能收走钱</a><a href="#section-5">哪些证据会推翻这篇文章</a><a href="#sources">证据与口径</a><a href="#research-files">下载研究材料 ↓</a></nav><article class="article-body" id="article-content"><div class="research-note"><strong>评审样刊</strong>　公开资料分析与独立推演。企业披露保留归因，模型为透明情景假设，不代表真实部署表现或投资收益。</div><h2 id="section-1">先把“成功”写进账本</h2>
+<p>一个客服 Agent 查到订单、解释政策，再调用退款工具，演示就结束了。生产系统的故事常常从这里开始：支付接口超时，钱到底退没退？用户随后改口要换货，之前的操作还能撤回吗？同一投诉从微信转到电话，系统会不会再赔一次？</p>
+<p>这几种情况决定的，首先是费用由谁承担。模型公司按调用收费，软件公司可能按“解决”收费，商家承担退款、投诉与客户流失。三张账单对应三个不同的成功定义。</p>
+<p>本文的判断是：Agent 的利润池，更可能聚集在能限定任务边界、掌握业务状态、证明交付结果的一层。模型变便宜有帮助，但如果验收和异常处理仍然昂贵，节约很容易被吃掉。这个判断有边界：低风险、可自动验收、容易撤销的任务，可能更适合便宜模型与简单规则，未必需要昂贵平台。</p>
+<h2 id="section-2">一笔退款，为什么需要一套系统</h2>
+<p>设想一家电商允许对未发货订单自动退款。这是用于拆解成本的工作流，不代表某家公司已经采用以下实现。</p>
+<p>第一步是确定状态。Agent 需要读取订单、仓储和支付记录，并知道哪一份数据是当前有效的。订单查询之后、退款之前，仓库可能已经发货；仅把查询结果塞进提示词，无法解决这个时间差。执行前再验证状态会增加一次查询，有助于减少错误退款；关键状态仍需原子条件更新或等效约束，避免检查后又发生变化。</p>
+<p>第二步是保证重试不会变成重复付款。网络超时只说明没有收到结果。为同一退款请求绑定唯一标识，重试时查询已有操作，才能避免把“再试一次”变成“再退一次”。幂等设计的价值，体现在少赔的钱和少查的工单里。</p>
+<p>第三步是限定权限。查询物流、发优惠券和退一万元，不能共用同一种授权。金额上限、可操作订单范围和必要的人审，可限制单次错误暴露；还需总额、频率限制与监控，防止重复错误累积损失。权限也会降低表面自动化率：被拦下的任务可能本来就不该自主完成。</p>
+<p>第四步是恢复。记录每一步是否完成、把待确认支付放进队列、允许人类从失败位置接手，通常比从头重跑整段对话更便宜。涉及资金的补救也不能假设总能“撤销”；应预先规定哪些只能升级处理。</p>
+<p>最后才是验收。τ-bench用对话后的数据库状态评价完成情况，提供了比只检查回复更扎实的测量思路；这里采用其方法启示，不把2024年基准成绩外推为今天的能力。<a href="https://arxiv.org/abs/2406.12045" target="_blank" rel="noopener noreferrer">E01</a> 用户不再回复，并不能单独证明退款到账。对这个任务，更有意义的条件是：政策符合、支付状态确认、订单状态一致，并观察约定窗口内的重复投诉。用户满意度与完成时长仍要另外看。</p>
+<p>Anthropic的评测方法也区分了“说已完成”和环境实际终态，并强调不同评分方式与人工校准。<a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener noreferrer">E05</a> 这些工程环节把不可控损失变成可管理成本。不过，接入接口、维护权限、处理异常和抽查质量都需要人。它们不会因为演示视频没有展示而消失。</p>
+<h2 id="section-3">每个验收成功任务，究竟花多少钱</h2>
+<p>下面是一组人民币情景假设，不是行业均值，也不是任何供应商报价。它刻意保留上线初期的保守做法：每个任务都经人审。</p>
+<p>每月进入系统 10,000 个同类任务；80% 由 Agent 完成并通过初审；其余 20% 升级，其中 95% 最终通过验收。于是最终成功数是 10,000 × [80% + 20% × 95%] = 9,900。</p>
+<p>成本分四笔：</p>
+<ul>
+<li>每个进入系统的任务，模型、工具与重试平均 0.60 元；已经包含重试，不能再加一次。</li>
+<li>每个任务初审 1.20 元，覆盖全部 10,000 个任务，不能只算失败单。</li>
+<li>初审未通过的任务，额外接管 8 元，包含升级后的处理与最终核验；成功或失败都付出这笔成本，不再重复加初审。</li>
+<li>每月工程维护与系统费用 20,000 元，假设该业务量范围内不变。</li>
+</ul>
+<p>总成本是 10,000 × (0.60 + 1.20 + 20% × 8) + 20,000 = 54,000 元。每个最终验收成功任务的成本为 54,000 ÷ 9,900 ≈ 5.45 元。最终失败的任务照样花了钱，所以留在分子里。</p>
+<p>若同口径、含处理及质检维护的人工流程每个进入任务花 6 元、最终成功率 99%，则每成功单约 6.06 元。Agent 方案仅节省约 10%。这里还假设初审判断准确，没有漏过的错误、赔偿或后续复联；升级失败也没有额外损失。因此它只是一个需要质量审计配合的成本模型，不能用账面节约替代上线判断。</p>
+<p>这组数字最有用的地方是阈值。令自主执行后通过初审的比例为 p（仍全部接受人审），其他参数不变，每成功单成本为：</p>
+<p>(11.8 − 8p) ÷ (0.95 + 0.05p)。</p>
+<p>它低于人工对照，需要 p 高于约 72.8%。当 p 降到 60%，成本升至约 7.14 元。按基准 80% 通过率，月任务量必须超过约 7,692 单才能摊薄固定费用、优于人工对照。这个阈值不适用于需要扩编维护团队的更大规模。</p>
+<p>模型与工具费用即使减半，每成功单也只省约 0.30 元。质量或流程的一个小变化，可能超过 API 降价的作用。如果实际审核会误判，就要额外测量误拒造成的接管费用、漏错造成的损失，并重新计算经独立抽检确认的成功数。供应商后台的“已解决”不能直接拿来替代分母。</p>
+<section class="calculator" aria-labelledby="calculator-title"><h2 id="calculator-title">把假设换成你的数字。</h2><p>可复算情景模型 · 人民币 / 月 · 全部任务接受人工初审。默认值是示例，不是行业均值、供应商报价或实测业绩。</p><form id="model-form"><div class="calc-inputs"><label for="param-N" title="每月进入系统的同类任务数">每月任务数 N（单）<input id="param-N" name="N" type="number" value="10000" min="1" step="1" required></label><label for="param-p" title="Agent自主执行后通过人工初审的比例；所有任务仍都接受初审，不表示无人监督比例">自主执行通过初审 p（%）<input id="param-p" name="p" type="number" value="80.0" min="0" max="100" step="0.1" data-percent="true" required></label><label for="param-r" title="初审未通过后升级处理的最终验收通过率">升级后验收通过率 r（%）<input id="param-r" name="r" type="number" value="95.0" min="0" max="100" step="0.1" data-percent="true" required></label><label for="param-c" title="每进入任务的模型、工具及所有重试总平均成本，元；不另加重试">模型、工具与重试 c（元/任务）<input id="param-c" name="c" type="number" value="0.6" min="0" step="0.01" required></label><label for="param-a" title="每进入任务的人工初审成本，元；覆盖所有任务">全量人工初审 a（元/任务）<input id="param-a" name="a" type="number" value="1.2" min="0" step="0.01" required></label><label for="param-e" title="每个初审失败任务的新增接管成本，元；含升级后处理与最终核验，不含已经计入a的初审；升级成败都计费">失败新增接管 e（元/失败任务）<input id="param-e" name="e" type="number" value="8" min="0" step="0.01" required></label><label for="param-F" title="每月工程维护与系统固定费用，元；仅在假定容量范围不变">每月固定费用 F（元）<input id="param-F" name="F" type="number" value="20000" min="0" step="0.01" required></label><label for="param-h" title="人工对照每进入任务全流程成本，元；含处理、质量检查、维护摊销，使用同样范围">人工对照全流程 h（元/任务）<input id="param-h" name="h" type="number" value="6" min="0" step="0.01" required></label><label for="param-q" title="人工对照最终验收通过率">人工对照验收率 q（%）<input id="param-q" name="q" type="number" value="99.0" min="0" max="100" step="0.1" data-percent="true" required></label></div><p id="model-error" role="alert" class="notice"></p></form><div class="calc-result" aria-live="polite" aria-atomic="true"><div><span>每验收成功任务成本</span><strong id="result-cost">¥5.45</strong></div><div><span>人工对照 / 每验收成功任务</span><strong id="result-manual">¥6.06</strong></div><div><span>方案每月总成本</span><strong id="result-total">¥54,000.00</strong></div><div><span>最终验收成功数</span><strong id="result-accepted">9,900 单</strong></div></div><p class="calc-formula" id="result-comparison">相对人工对照低 10.0%（成本口径，非现金节约）</p><p class="calc-formula" id="result-threshold"></p><p class="calc-formula">成功数 = N × [p + (1 − p) × r]<br>总成本 = N × [c + a + (1 − p) × e] + F<br>每成功单成本 = 总成本 ÷ 成功数；人工对照 = h ÷ q。<br>失败任务的成本仍计入分子；初审覆盖全部任务；升级接管含最终核验，不能重复计费。</p><details><summary>模型边界与假设</summary><ul><li>人民币，按月，全量人审；所有费用均为示例。</li><li>初审准确识别合格和不合格；漏错、误拒和质量损失未显式建模。真实应用必须另计并用独立抽检校验成功数。</li><li>最终失败任务产生的成本仍在分子，只有最终验收成功任务进入分母。</li><li>同类任务、同等质量、延迟与服务承诺下比较；人工h含全流程费用，需由实测替换。</li><li>F在该业务量范围内不变；如扩容需要扩编或新系统，必须重算。</li><li>不含未估计的错误赔付与尾部风险，故不能凭模型单独批准上线。</li><li>p阈值须落在0至1且分母有效；N阈值分母&lt;=0时，增加流量不能使当前方案盈亏平衡。</li><li>节省工时不必然变成现金节约；模型是成本比较，不是现金流预测。</li></ul></details><button class="small-button" id="reset-model" type="button">恢复文中默认假设</button><noscript><p class="notice">浏览器未启用 JavaScript，当前显示默认示例结果；下载模型可复算。</p></noscript></section><h2 id="section-4">客户省下的时间，谁能收走钱</h2>
+<p>真实业务研究提供了一点支持，也限定了想象空间。《Generative AI at Work》的2024年修订版覆盖5,172名客服人员：AI辅助使每小时解决问题数平均增加15%。这项研究支持在该场景下辅助工具能够提高产出，尚未证明自主客服能够以同样幅度降低成本，更没有证明利润增长15%。<a href="https://arxiv.org/abs/2304.11771v2" target="_blank" rel="noopener noreferrer">E06</a></p>
+<p>客服团队省出工时后，只有减少外包、加班、自然减员不补，或用同样资源服务更多付费需求，收益才可能进入利润与现金。否则，首先得到的是闲余产能。上线费用通常先付，工资和长期合同却未必立刻变化。</p>
+<p>供应商的账与客户不同。Salesforce在2025年5月发布的Flex Credits方案中，标准动作折合0.10美元；这是当时公告价格，不是当前合同报价。按动作付费时，同一个问题重试五次可能产生更多消耗，客户却只需要一次解决。结果计费能缓解这种分歧，但会把谈判焦点移到“怎样算解决、错误由谁负责”。<a href="https://www.salesforce.com/news/press-releases/2025/05/15/agentforce-flexible-pricing-news/" target="_blank" rel="noopener noreferrer">E09</a></p>
+<p>因此，真正值得追踪的经营变量是：同一类任务产生的净新增收入，扣掉模型、实施、支持和异常处理之后，能留下多少；客户续约时是否仍愿意付费。以下三家公司各有一个可能收费的位置，也各有一个尚未回答的问题。</p>
+<h3 id="salesforce业务状态的入口能否带来净新增收入">Salesforce：业务状态的入口，能否带来净新增收入</h3>
+<p>客户记录、客服流程和操作权限给了Salesforce一个靠近验收结果的位置。这是机制上的优势推断。</p>
+<p>公司2026年8月公布的FY2027第二季度资料称，Agentforce ARR超过15亿美元，但该季口径开始纳入Slackbot与Headless 360。其AWU还混合计算解决案例、更新记录与触发流程。ARR是合同年化指标，AWU是混合工作量；二者都不能直接证明赚到了多少自主执行利润。<a href="https://investor.salesforce.com/news/news-details/2026/Salesforce-Delivers-Record-Second-Quarter-Fiscal-2027-Results/default.aspx" target="_blank" rel="noopener noreferrer">E10</a></p>
+<p>收入最终归属Salesforce的条件，是客户为执行能力新增预算，且复用产品收入足以覆盖模型及交付成本。如果credit预算主要替代旧席位，新增标签可能比新增收入更快。应追踪同口径续约、实际消耗与增购，尤其需要拆开合同规模、收入确认与回款。</p>
+<h3 id="microsoft两层收费同时承担两层成本">Microsoft：两层收费，同时承担两层成本</h3>
+<p>Microsoft可从应用订阅和云端使用两头收费，也能利用现有身份、分发与办公入口降低推广摩擦。FY2026第四季度电话会披露，M365 Copilot付费席位超过3,000万，并强调席位加消耗的路线；同一资料显示Microsoft Cloud毛利率为65%、同比下降，管理层解释涉及业务组合、AI基础设施与使用增长等因素。<a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4" target="_blank" rel="noopener noreferrer">E11</a></p>
+<p>这支持“商业化已具规模”，不支持“Agent单独高利润”。Copilot席位不等于自主Agent活跃用户，云毛利也不能全部归因于Agent。公司还需为基础设施投入现金，折旧与资本开支的时点不同。利润能否转化为现金，要把使用收入、云成本、资本开支和客户留存一起看。</p>
+<h3 id="servicenow治理能否成为产品收入">ServiceNow：治理能否成为产品收入</h3>
+<p>ServiceNow靠近工单、审批和企业流程，具备把治理与执行做成可复用产品的条件。其2026年第二季度披露AI ACV超过10亿美元，订阅收入38.77亿美元，订阅GAAP毛利率73.5%。AI ACV是合同指标；整体订阅收入和毛利并未拆出自主Agent的贡献。<a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Reports-Second-Quarter-2026-Financial-Results/default.aspx" target="_blank" rel="noopener noreferrer">E12</a></p>
+<p>这里的关键是复用率。同一套权限与恢复能力卖给更多客户，收入可以长得比交付成本快；每家都要重写流程，则更接近人力服务。若治理功能被云平台捆绑提供，ServiceNow仍可能提升产品留存，却未必能单独加价。检验点是同基础产品上的净增合同金额、续约和实施成本，而非AI标签覆盖多少产品。</p>
+<h2 id="section-5">哪些证据会推翻这篇文章</h2>
+<p>第一个反例是测量失败。METR在2025年的小样本随机实验里发现，熟悉自己项目的开发者使用当时AI工具后反而慢19%。但其2026年后续研究指出严重选择偏差、调整实验设计，新估计的不确定区间也跨零。两份材料共同提醒：体感、旧工具结果和特定人群，都不足以替代今天的匹配对照。<a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/" target="_blank" rel="noopener noreferrer">E07</a><a href="https://metr.org/blog/2026-02-24-uplift-update/" target="_blank" rel="noopener noreferrer">E08</a></p>
+<p>第二个反例直接威胁本文的利润分配判断。Anthropic在2026年4月介绍Managed Agents时，已经把持久会话日志、运行框架和隔离环境拆开，提供故障恢复设计。模型平台正在进入可靠执行这一层。日志恢复本身还不保证外部退款恰好一次，但如果平台把这些能力标准化，应用层可收费的工程差异就会收窄。<a href="https://www.anthropic.com/engineering/managed-agents" target="_blank" rel="noopener noreferrer">E04</a></p>
+<p>接下来值得等待三类事件，而非一个宏大的“Agent时代”日期：</p>
+<ol type="1">
+<li>同一任务分布下的上线对照：完整成本下降，复联、赔偿和超时没有恶化。如果便宜通用模型加简单规则持续胜出，本文对复杂执行平台的溢价判断应下调。</li>
+<li>下一轮真实续约：同口径新增付费与实际使用同步，扣除实施及运行成本后仍有增量利润。若主要靠旧预算迁移，收入池扩张判断就要收缩。</li>
+<li>跨客户交付：第二家、第五家客户的实施周期和异常处理成本下降。若每家都要从头定制，所谓平台优势可能只是项目经验。</li>
+</ol>
+<p>对部署方，先选一个边界清楚、能验证终态的任务，把完整成本算出来。对公司研究者，沿着同一个任务追钱：谁承担失败，谁定义验收，谁收到新增预算，谁支付算力与交付费用。</p>
+<p>可靠执行有经济价值。能否把价值留在自己的账上，仍须由合同、续约和现金流来回答。</p>
+<h2 id="sources">证据与口径</h2>
+<p>资料核对截止2026-10-12。工程建议和公司价值分配为本文推断；模型为纯假设。下表为原始资料的简要索引，厂商披露不等于独立因果验证。本文不含估值或交易建议。</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="可横向滚动的数据表"><table>
+<thead>
+<tr class="header">
+<th>来源</th>
+<th>发布日期</th>
+<th>采用内容与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://arxiv.org/abs/2406.12045" target="_blank" rel="noopener noreferrer">E01 · τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains</a></td>
+<td>2024-06-17</td>
+<td>终态验证方法；历史模拟基准，非当前生产成功率。</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.anthropic.com/engineering/managed-agents" target="_blank" rel="noopener noreferrer">E04 · Scaling Managed Agents: Decoupling the brain from the hands</a></td>
+<td>2026-04-08</td>
+<td>厂商持久日志与恢复设计；不等于外部操作恰好一次。</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener noreferrer">E05 · Demystifying evals for AI agents</a></td>
+<td>2026-01-09</td>
+<td>厂商评测方法；未证明任一产品已达生产SLA。</td>
+</tr>
+<tr class="even">
+<td><a href="https://arxiv.org/abs/2304.11771v2" target="_blank" rel="noopener noreferrer">E06 · Generative AI at Work (arXiv v2)</a></td>
+<td>2024-11-06</td>
+<td>修订版5,172人、产出+15%；辅助客服，非自主Agent利润。</td>
+</tr>
+<tr class="odd">
+<td><a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/" target="_blank" rel="noopener noreferrer">E07 · Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity</a></td>
+<td>2025-07-10</td>
+<td>2025年特定开发者实验；须结合后续更新，不能泛化。</td>
+</tr>
+<tr class="even">
+<td><a href="https://metr.org/blog/2026-02-24-uplift-update/" target="_blank" rel="noopener noreferrer">E08 · We are Changing our Developer Productivity Experiment Design</a></td>
+<td>2026-02-24</td>
+<td>后续选择偏差与设计调整；不确定区间跨零。</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.salesforce.com/news/press-releases/2025/05/15/agentforce-flexible-pricing-news/" target="_blank" rel="noopener noreferrer">E09 · Salesforce Introduces New Flexible Agentforce Pricing</a></td>
+<td>2025-05-15</td>
+<td>2025年发布时的动作价格；非现行合同价或每成功单价。</td>
+</tr>
+<tr class="even">
+<td><a href="https://investor.salesforce.com/news/news-details/2026/Salesforce-Delivers-Record-Second-Quarter-Fiscal-2027-Results/default.aspx" target="_blank" rel="noopener noreferrer">E10 · Salesforce Delivers Record Second Quarter Fiscal 2027 Results</a></td>
+<td>2026-08-26</td>
+<td>FY2027 Q2合同与工作量；ARR扩口径，AWU混合动作。</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4" target="_blank" rel="noopener noreferrer">E11 · Microsoft FY2026 Q4 Earnings Conference Call</a></td>
+<td>2026-07-29</td>
+<td>FY2026 Q4席位与云毛利；非Agent独立收入或毛利。</td>
+</tr>
+<tr class="even">
+<td><a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Reports-Second-Quarter-2026-Financial-Results/default.aspx" target="_blank" rel="noopener noreferrer">E12 · ServiceNow Reports Second Quarter 2026 Financial Results</a></td>
+<td>2026-07-22</td>
+<td>2026 Q2合同及订阅财务；AI ACV非自主Agent利润。</td>
+</tr>
+</tbody>
+</table>
+</div><section class="download-box" id="research-files"><h2>带走这份研究</h2><p>下载原文、公开证据台账与模型假设。所有示例均可复核，不含私人数据。</p><a href="downloads/article.md" download>文章 Markdown ↓</a><a href="downloads/evidence.csv" download>证据台账 CSV ↓</a><a href="downloads/model.json" download>模型参数 JSON ↓</a></section><div class="article-bottom"><p>这是一份完整、开放阅读的样刊。未来专题工作包尚在讨论，未开放收费。</p><a href="index.html#membership">查看会员与专题包提案 ↗</a></div></article></div></main><footer class="wrap footer"><span>© 2026 落地之后 · AFTER DEPLOYMENT</span><div class="footer-links"><a href="index.html#method">研究方法</a><a href="index.html#about">关于频道</a><a href="archive/">历史博客归档 ↗</a><span>独立判断，持续校准。</span></div></footer><script id="model-defaults" type="application/json">{"N": 10000, "p": 0.8, "r": 0.95, "c": 0.6, "a": 1.2, "e": 8, "F": 20000, "h": 6, "q": 0.99}</script></body></html>
