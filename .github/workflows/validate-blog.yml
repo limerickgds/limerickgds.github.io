@@ -1,0 +1,29 @@
+name: Validate blog migration
+on:
+  pull_request:
+    branches: [master]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out proposed changes
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check migration and model
+        run: |
+          python3 _checks/check_migration.py
+          node _checks/check_model.cjs
+          node --check assets/channel/article.js
+          git diff --check 94608e6a9c8584b0b6f9dc192583107d1a2a3ead HEAD
+      - name: Build with official GitHub Pages Jekyll environment
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Verify rendered archive and static channel
+        run: python3 _checks/check_build.py
