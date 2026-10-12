@@ -5,7 +5,7 @@ Run from the repository root:
 - `python3 _checks/check_migration.py`
 - `node _checks/check_model.cjs`
 - `node --check assets/channel/article.js`
-- `git diff --check`
+- `git diff --check` and `git diff --cached --check`
 
 The migration check compares every pre-existing file except the intentionally replaced homepage and one header navigation addition against base commit `94608e6a9c8584b0b6f9dc192583107d1a2a3ead`. All 10 legacy posts, layouts, configuration and assets are retained. The archive uses all `site.posts` and preserves `post.url`.
 
