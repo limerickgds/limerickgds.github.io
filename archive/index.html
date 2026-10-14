@@ -1,0 +1,24 @@
+---
+layout: archive
+title: 历史博客归档
+keywords: limerick,limerickgds,blog,javascript,html,css,code,front-end development, web project build
+---
+
+<div class="container">
+	<ul class="post-list">
+		{% for post in site.posts %}
+		<li class="post-li">
+            <div class="post-li-hd clearfix">
+                <span class="post-title">
+                    <a class="underline" href="{{ post.url }}">{{post.title}}</a>
+                </span>
+            </div>
+            <div class="post-li-content">{{post.excerpt}}</div>
+            <div class="post-li-footer">
+                <span class="post-time">{{post.date | date:'%Y-%m-%d'}}</span>
+                <a class="pull-right post-a" href="{{ post.url }}">more</a>
+            </div>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
