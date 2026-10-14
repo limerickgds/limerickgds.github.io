@@ -17,7 +17,9 @@ jobs:
       - name: Check migration and model
         run: |
           python3 _checks/check_migration.py
+          python3 _checks/check_bilingual.py
           node _checks/check_model.cjs
+          node _checks/check_model_ui.cjs
           node --check assets/channel/article.js
           git diff --check 94608e6a9c8584b0b6f9dc192583107d1a2a3ead HEAD
       - name: Build with official GitHub Pages Jekyll environment

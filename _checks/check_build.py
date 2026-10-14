@@ -20,6 +20,6 @@ for url in posts:
  p=SITE/unquote(urlsplit(url).path.lstrip('/'))
  if p.is_dir():p=p/'index.html'
  assert p.is_file(),f'Missing historical post output: {url}'
-for name in ['index.html','article.html','assets/channel/article.js','assets/channel/style.css','assets/channel/favicon.svg','downloads/article.md','downloads/evidence.csv','downloads/model.json']:
+for name in ['index.html','article.html','assets/channel/article.js','assets/channel/style.css','assets/channel/favicon.svg','downloads/article.md','downloads/evidence.csv','downloads/model.json','en/index.html','en/article.html']:
  assert (SITE/name).read_bytes()==(ROOT/name).read_bytes(), f'Static channel changed during build: {name}'
-print('PASS: Jekyll rendered all 10 original post URLs and archive; 8 static channel files preserved.')
+print('PASS: Jekyll rendered all 10 original post URLs and archive; 10 static channel files preserved.')
